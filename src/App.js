@@ -27,20 +27,25 @@ class App extends Component {
     })
   }
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, index) => {
+
+    const person = { ...this.state.persons[index] }
+
+    person.name = event.target.value
+
+    const persons = [...this.state.persons]
+    persons[index] = person
+
     this.setState({
-      persons: [
-        { name: "Neeraj", age: "36" },
-        { name: event.target.value, age: "58" },
-        { name: "Sony", age: "16" },
-      ]
+      persons: persons
     })
   }
 
   render() {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -56,10 +61,11 @@ class App extends Component {
           {
             this.state.persons.map((person, index) =>
               <Person
+                key={index}
                 click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
-                nameChanged={this.nameChangedHandler}
+                nameChanged={(event) => this.nameChangedHandler(event, index)}
               />)}
         </div>
 
@@ -70,6 +76,9 @@ class App extends Component {
         //   <Person name={this.state.persons[2].name} age={this.state.persons[2].age} ></Person>
         // </ >
       )
+
+      style.backgroundColor = 'red'
+
     }
 
 
