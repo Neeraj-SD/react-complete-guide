@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import './App.css';
+import classes from './App.css';
 
 class App extends Component {
 
@@ -42,16 +42,7 @@ class App extends Component {
   }
 
   render() {
-
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
+    let btnClass = ''
     let persons = null
 
     if (this.state.showPersons) {
@@ -76,16 +67,16 @@ class App extends Component {
         //   <Person name={this.state.persons[2].name} age={this.state.persons[2].age} ></Person>
         // </ >
       )
-
-      style.backgroundColor = 'red'
+      btnClass = classes.Red
+      // console.log({ classes.Red })
 
     }
 
 
     return (
-      <div className="App" >
+      <div className={classes.App} >
         <h1>Hi, I'm a React App.</h1>
-        <button style={style} onClick={this.toggleShowPersons}>Switch</button>
+        <button className={btnClass} onClick={this.toggleShowPersons}>Switch</button>
         {persons}
       </div>
     );
